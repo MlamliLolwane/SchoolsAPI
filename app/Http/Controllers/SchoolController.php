@@ -64,18 +64,11 @@ class SchoolController extends Controller
      * @param  \App\Models\School  $school
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSchoolRequest $request, School $school)
+    public function update(UpdateSchoolRequest $request, $school_id)
     {
         $request->validated();
 
-        $school->school_name = $request->school_name;
-        $school->email = $request->email;
-        $school->primary_phone_number = $request->primary_phone_number;
-        $school->secondary_phone_number = $request->secondary_phone_number;
-        $school->physical_address = $request->physical_address;
-        $school->postal_address = $request->postal_address;
-
-        $school->save();
+        $school = School::where('id', $school_id)->update($request->all());
 
         return response()->json($school, Response::HTTP_OK);
     }
@@ -88,7 +81,7 @@ class SchoolController extends Controller
      */
     public function destroy($school_id)
     {
-        $school = School::where('id', $school_id);
+        $school = School::where('id', $school_id)->delete();
 
         return response()->json($school, Response::HTTP_OK);
     }

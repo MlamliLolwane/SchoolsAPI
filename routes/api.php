@@ -22,5 +22,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('/schools/store', [SchoolController::class, 'store']);
 Route::get('/schools/index', [SchoolController::class, 'index']);
 Route::get('/schools/show/{school_id}', [SchoolController::class, 'show']);
-Route::patch('/schools/update', [SchoolController::class, 'update']);
-Route::delete('/schools/delete', [SchoolController::class, 'delete']);
+Route::patch('/schools/update/{school_id}', [SchoolController::class, 'update']);
+Route::delete('/schools/destroy/{school_id}', [SchoolController::class, 'destroy']);
