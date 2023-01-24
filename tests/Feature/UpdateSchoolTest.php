@@ -9,11 +9,10 @@ use Tests\TestCase;
 
 class UpdateSchoolTest extends TestCase
 {
+    use RefreshDatabase;
     //Test does not work for update
     public function test_that_a_school_can_be_updated()
     {
-        School::truncate();
-
         //Add a school to the database
         $school = School::factory()->create([
             'school_name' => 'Golfview Combined School',
@@ -30,8 +29,7 @@ class UpdateSchoolTest extends TestCase
         $response = $this->patchJson('/api/schools/update/'.$school->id, [
             'school_name' => 'Golfview Secondary School'
         ]);
-        
-        dd($response['data']);
+    
         //Assert that the update did take place
         $response->assertOk();
     }

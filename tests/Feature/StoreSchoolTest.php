@@ -10,11 +10,10 @@ use Tests\TestCase;
 class StoreSchoolTest extends TestCase
 {
     use RefreshDatabase;
+    
     //Test whether a school can be created
     public function test_that_a_school_can_be_created()
     {
-        School::truncate();
-
         //Send a valid request
         $response = $this->postJson('/api/schools/store', [
             'school_name' => 'Golfview Combined School',
@@ -32,8 +31,6 @@ class StoreSchoolTest extends TestCase
     //Test the validation rules for the school
     public function test_the_validation_rules_for_the_school()
     {
-        School::truncate();
-
         //Send a request with no data
         $response = $this->postJson('/api/schools/store');
 
@@ -50,8 +47,6 @@ class StoreSchoolTest extends TestCase
     //Test the validation for the contact numbers
     public function test_that_the_primary_and_secondary_phone_numbers_cannot_be_greater_or_less_than_10()
     {
-        School::truncate();
-
         $response = $this->postJson('/api/schools/store', [
             'school_name' => 'Golfview Combined School',
             'email' => 'golfview@gmail.com',
@@ -72,8 +67,6 @@ class StoreSchoolTest extends TestCase
     //Test that schools can't have numbers in them
     public function test_that_schools_only_contain_alphabets()
     {
-        School::truncate();
-
         $response = $this->postJson('/api/schools/store', [
             //School name with underscores and numerical values
             'school_name' => 'Golfview_Combined_School 101',

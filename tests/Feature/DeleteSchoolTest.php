@@ -13,8 +13,7 @@ class DeleteSchoolTest extends TestCase
 
     public function test_school_can_be_deleted()
     {
-        School::truncate();
-
+        $this->withoutExceptionHandling();
         //Create 10 schools
         School::factory()->count(10)->create();
 
@@ -22,8 +21,8 @@ class DeleteSchoolTest extends TestCase
         $this->assertCount(10, School::all());
 
         //Delete the 10th school
-        $this->deleteJson('/api/schools/delete/10');
-        dd(School::all());
+        $res = $this->deleteJson('/api/schools/destroy/10');
+
         //Verify that exactly 9 schools are left
         $this->assertCount(9, School::all());
     }

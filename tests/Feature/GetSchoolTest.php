@@ -9,11 +9,11 @@ use Tests\TestCase;
 
 class GetSchoolTest extends TestCase
 {
+    use RefreshDatabase;
+    
     //Get all schools from the database
     public function test_that_all_schools_can_be_retrieved_from_the_database()
     {
-        School::truncate();
-
         //Create 15 schools (pagination)
         School::factory(15)->create();
 
@@ -30,8 +30,6 @@ class GetSchoolTest extends TestCase
     //Get a specific school from the database
     public function test_that_a_school_can_be_retrieved_by_id()
     {
-        School::truncate();
-
         //Create 10 schools
         School::factory(10)->create();
 
@@ -61,8 +59,6 @@ class GetSchoolTest extends TestCase
     //Test that no school is returned when an invalid id is provided
     public function test_that_no_school_is_returned_if_an_invalid_id_is_provided()
     {
-        School::truncate();
-
         //Create 10 schools
         School::factory(10)->create();
 
