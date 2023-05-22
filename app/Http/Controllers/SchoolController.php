@@ -16,7 +16,7 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        $schools = School::paginate(15);
+        $schools = School::all();
 
         return response()->json($schools, Response::HTTP_OK);
     }
